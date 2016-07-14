@@ -1,6 +1,7 @@
 angular.module('rtfmApp', ['firebase', 'ui.router'])
 
-.constant('firebaseRoot', {url: 'https://smrtsmrf-rtfm.firebaseio.com'})
+// .constant('firebaseRoot', {url: 'https://smrtsmrf-rtfm.firebaseio.com'})
+.constant('firebaseRoot', {url: 'https://rtfm-cahlan.firebaseio.com/cahlan'})
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 	
@@ -32,5 +33,24 @@ angular.module('rtfmApp', ['firebase', 'ui.router'])
 		}
 	})
 
-	$urlRouterProvider.otherwise('/threads')
+	.state('login', {
+		url: '/login',
+		templateUrl: '/templates/login.html',
+		controller: 'loginCtrl'
+	})
+
+	.state('signup', {
+		url: '/signup',
+		templateUrl: '/templates/signup.html',
+		controller: 'signupCtrl'
+	})
+
+	.state('logout', {
+		url: '/logout',
+		controller: function (userService) {
+			return userService.logout();
+		}
+	})
+
+	$urlRouterProvider.otherwise('/login')
 }])
